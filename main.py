@@ -1,3 +1,4 @@
+from madlibs import madlibs
 import random
 from rockpaperscissors import * 
 
@@ -11,7 +12,9 @@ def gameselection(chosen):
     while chosen == False:
         choice = input('')
         if choice == 'madlibs':
-            print('madlibs!')
+            madlibs()
+            chosen = True
+            backToGameHub()
 
         elif choice == 'rock paper scissors':
             rockPaperScissors()
