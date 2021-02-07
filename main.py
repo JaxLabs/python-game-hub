@@ -1,6 +1,7 @@
-from madlibs import madlibs
+from madlibs import *
 import random
 from rockpaperscissors import * 
+from tictactoe import *
 
 def welcome():
     clearScreen()
@@ -23,7 +24,11 @@ def gameselection(chosen):
 
 
         elif choice == 'tic tac toe':
-            print("tic tac toe!")
+            if __name__ == '__main__':
+                x_player = ComputerPlayer('X')
+                o_player = User('O')
+                tic = TicTacToe()
+                play(tic, x_player, o_player, print_game=True)
             chosen = True
             backToGameHub()
         
