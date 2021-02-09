@@ -1,19 +1,17 @@
-import pprint
-
 def solve(board):
     # solves sudoku using a backtracking technique
     # preconditions: list of ints making up the board
     # postconditions: solved sudoku board
 
     find = find_empty(board)
-    if find:
-        row,col = find
-    else:
+    if not find:
         return True
+    else:
+        row,col = find
     
     for i in range(1,10):
-        if vaid(board, (row, col), i):
-            board[row][col] = 1
+        if valid(board,(row, col), i):
+            board[row][col] = i
 
             if solve(board):
                 return True
@@ -31,11 +29,15 @@ def valid(board, pos, num):
     # postconditions: returns bool value
 
     #row
-    for i in range(0, len(board)):
-        if board[0][i] == num and pos[i] != i:
+    for i in range(len(board[0])):
+        if board[pos[0]][i] == num and pos[1] != i:
+            return False
+    #colum
+    for i in range(len(board)):
+        if board[i][pos[1]] == num and pos[0] != i:
             return False
 
-    #colum 
+    #box 
     box_x = pos[1]//3
     box_y = pos[0]//3
 
@@ -43,6 +45,7 @@ def valid(board, pos, num):
         for j in range(box_x*3, (box_x*3 +3)):
             if board[i][j] == num and (i,j) != pos:
                 return False
+
     return True
 
 def find_empty(board):
@@ -53,7 +56,7 @@ def find_empty(board):
     for i in range(len(board)):
         for j in range(len(board[0])):
             if board[i][j]  == 0:
-                return (i, j)
+                return (i, j) #i = row, j = colum
 
 def print_board(board):
     # prints out board to the consol
@@ -62,29 +65,25 @@ def print_board(board):
 
     for i in range(len(board)):
         if i % 3 == 0 and i != 0:
-            print('- - - - - - - - - - - - - -')
+            print('- - -    - - -    - - -')
         for j in range(len(board[0])):
-            if j % 3 == 0:
-                print(' | ', end = '')
-
-                if j == 8:
-                    print(board[i][j], end='\n')
-                else:
-                    print(str(board[i][j]) + ' ', end='')
+            if j % 3 == 0 and j != 0:
+                print(' | ', end='')
+            if j == 8:
+                print(board[i][j])
+            else:
+                print(str(board[i][j]) + ' ', end='')
                 
 sodokuBoard = [
-                [7, 8, 0, 4, 0, 0, 1, 2, 0],
-                [6, 0, 0, 0, 7, 5, 0, 0, 9],
-                [0, 0, 0, 6, 0, 1, 0, 7, 8],
-                [0, 0, 7, 0, 4, 0, 2, 6, 0],
-                [0, 0, 1, 0, 5, 0, 9, 3, 0],
-                [9, 0, 4, 0, 6, 0, 0, 0, 5],
-                [0, 7, 0, 3, 0, 0, 0, 1, 2],
-                [1, 2, 0, 0, 0, 7, 4, 0, 0],
-                [0, 4, 9, 2, 0, 6, 0, 0, 7] 
+                [3, 1, 0, 8, 0, 0, 5, 4, 0],
+                [0, 7, 0, 9, 0, 5, 0, 3, 0],
+                [0, 0, 0, 4, 0, 0, 1, 8, 9],
+                [8, 4, 0, 2, 6, 0, 0, 0, 1],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [5, 0, 0, 0, 9, 4, 0, 7, 2],
+                [7, 8, 2, 0, 0, 1, 0, 0, 0],
+                [0, 6, 0, 5, 0, 9, 0, 2, 0],
+                [0, 5, 3, 0, 0, 2, 0, 1, 4] 
             ]
 
-pp = pprint.PrettyPrinter(width = 41, compact = True)
-solve(sodokuBoard)
-pp.pprint(sodokuBoard)
 

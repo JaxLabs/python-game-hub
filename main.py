@@ -2,6 +2,7 @@ from madlibs import *
 import random
 from rockpaperscissors import * 
 from tictactoe import *
+from sudoku import *
 
 def welcome():
     clearScreen()
@@ -33,7 +34,8 @@ def gameselection(chosen):
             backToGameHub()
         
         elif choice == 'sudoku':
-            print("sudoku!")
+            solve(sodokuBoard)
+            print_board(sodokuBoard)
             chosen = True
             backToGameHub()
 
