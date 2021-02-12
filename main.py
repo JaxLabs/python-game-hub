@@ -3,6 +3,7 @@ import random
 from rockpaperscissors import * 
 from tictactoe import *
 from sudoku import *
+from hangman import *
 
 def welcome():
     clearScreen()
@@ -40,7 +41,7 @@ def gameselection(chosen):
             backToGameHub()
 
         elif choice == 'hangman':
-            print("hangman!")
+            hangman()
             chosen = True
             backToGameHub()
             
