@@ -79,9 +79,3 @@ def hangman():
             print("You've won!!")
 
 
-
-if __name__ == '__main__':
-    hangman()
-
-
-
