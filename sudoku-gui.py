@@ -30,8 +30,7 @@ class SudokuBoard(object):
         return board
 
 class SudokuGame(object):
-    # checks to see if game has been completed
-
+    # checks to see if game has been completeds
     def __init__(self, board_map):
         self.board_map = board_map
         self.game_layout = SudokuBoard(board_map)
@@ -60,3 +59,37 @@ class SudokuGame(object):
                     return False
         self.game_over = True
         return True
+
+    def _check_box(self, box):
+        return set(box) == set(range(1, 10))
+
+    def _check_row(self, row):
+        return self.__check_box(self.puzzle[row])
+
+    def _check_column(self, row, column):
+        return self._check_box(
+            [self.layout[row][column] for row in xrange(9)]
+        )
+
+    def __check_square(self, row, column):
+        return self.__check_box(
+            [
+                self.layout[r][c]
+                for r in xrange(row * 3, (row + 1) * 3)
+                for c in xrange(column * 3, (column + 1) * 3)
+            ]
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
