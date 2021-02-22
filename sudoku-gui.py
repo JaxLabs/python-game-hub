@@ -1,8 +1,6 @@
 import argparse
 from tkinter import *
 
-BOARDS = ['easy', 'medium', 'hard', 'error']
-
 MARGIN = 20
 SIDE = 50  
 WIDTH = HEIGHT = MARGIN * 2 + SIDE * 9
@@ -132,7 +130,58 @@ class sudokuUI(Frame):
             y1 = MARGIN + i * SIDE
             self.canvas.create_line(x0, y0, x1, y1, fill=color)
 
+    def __draw_numbers(self):
+        self.canvas.delete("numbers")
+        for i in range(9):
+            for j in range(9):
+                answer = self.game.layout[i][j]
+                if answer != 0:
+                    x = MARGIN + j * SIDE + SIDE / 2
+                    y = MARGIN + i * SIDE + SIDE / 2
+                    original = self.game.start[i][j]
+                    color = "black" if answer == original else "sea green"
+                    self.canvas.create_text(
+                        x, y, text=answer, tags="numbers", fill=color
+                    )
+    def __clear_answers(self):
+        self.game.start()
+        self.canvas.delete("You're a winner!")
+        self.__draw_layout()
 
+    def __cell_clicked(self, event):
+        if self.game.game_over:
+            return
+
+        #check if clicked
+        x, y = event.x, event.y
+        if (MARGIN < x < WIDTH - MARGIN and MARGIN < y < HEIGHT - MARGIN):
+            self.canvas.focus_set() #highlight
+
+            #check what was clicked
+            row, col = (y - MARGIN) / SIDE, (x - MARGIN) / SIDE
+
+            # check if it was already clicked
+            if (row, col) == (self.row, self.col):
+                self.row, self.col = -1, -1
+            elif self.game.puzzle[row][col] == 0:
+                self.row, self.col = row, col
+
+        self._draw_highlight()
+
+    def _draw_highlight(self):
+        self.canvas.delete("highlight")
+        if self.row >= 0 and self.col >= 0:
+                x0 = MARGIN + self.col * SIDE + 1
+                y0 = MARGIN + self.row * SIDE + 1
+                x1 = MARGIN + (self.col + 1) * SIDE - 1
+                y1 = MARGIN + (self.row + 1) * SIDE - 1
+                self.canvas.create_rectangle(
+                    x0, y0, x1, y1,
+                    outline="red", tags="highlight"
+                )
+    def __key_pressed(self, event):
+        if self.game.game_over:
+            return
 
 
 
