@@ -182,7 +182,29 @@ class sudokuUI(Frame):
     def __key_pressed(self, event):
         if self.game.game_over:
             return
+        if self.row >= 0 and self.col >= 0 and event.char in "1234567890":
+            self.game.puzzle[self.row][self.col] = int(event.char)
+            self.col, self.row = -1, -1
+            self.__draw_puzzle()
+            self.__draw_cursor()
+            if self.game.check_win():
+                self.__draw_victory()
 
+    def __draw_victory(self):
+        # create rectangle
+        x0 = y0 = MARGIN + SIDE * 2
+        x1 = y1 = MARGIN + SIDE * 7
+        self.canvas.create_rectangle(
+            x0, y0, x1, y1,
+            tags="victory", fill="dark blue", outline="blue"
+        )
+        # create text
+        x = y = MARGIN + 4 * SIDE + SIDE / 2
+        self.canvas.create_text(
+            x, y,
+            text="You win!", tags="winner",
+            fill="white", font=("Arial", 32)
+        )
 
 
 
