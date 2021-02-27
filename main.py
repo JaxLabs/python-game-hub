@@ -14,6 +14,7 @@ def welcome():
 def gameselection(chosen):
     while chosen == False:
         choice = input('')
+        choice = choice.lower()
         if choice == 'madlibs':
             madlibs()
             chosen = True

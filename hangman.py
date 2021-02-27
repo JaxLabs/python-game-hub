@@ -22,7 +22,7 @@ def hangman():
     trys = 6
 
     wizard = "(∩ ͡° ͜ʖ ͡°)⊃━☆"
-    spell = "･ﾟ✧" #if game is lost should be output 6 times
+    spell = "⋆" #if game is lost should be output 6 times
     manAlive = "/(°□°)/"
     
     
@@ -37,10 +37,10 @@ def hangman():
             for x in range((6 - trys%6)):
                 print(spell, end = '')
             for x in range(5 - (6 - trys%6)):
-                print('   ', end = '')
+                print('', end = '')
         else:
             for x in range(7):
-                print('   ', end = '')
+                print('', end = '')
         
         print(manAlive)
 
