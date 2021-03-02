@@ -62,10 +62,17 @@ def print_board(board):
     # prints out board to the consol
     # preconditions: the list of numbers on the board
     # postconditions: returns nothing and shows board on screen
-
+    gridLetters = ["a ","b ","c ","d ","e ","f ","g ","h ","i "]
+    print("Type in a number(1-9) and then a spot on the grid like this a:i")
+    print(" a b c    d e f    g h i")
+    num = 0
     for i in range(len(board)):
+        if i % 3 != 0:
+            print (gridLetters[num], end='')
+            num= num+1
+
         if i % 3 == 0 and i != 0:
-            print('- - -    - - -    - - -')
+            print(' - - -    - - -    - - -')
         for j in range(len(board[0])):
             if j % 3 == 0 and j != 0:
                 print(' | ', end='')
@@ -85,5 +92,6 @@ sodokuBoard = [
                 [0, 6, 0, 5, 0, 9, 0, 2, 0],
                 [0, 5, 3, 0, 0, 2, 0, 1, 4] 
             ]
+
 
 

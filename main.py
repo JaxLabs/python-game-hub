@@ -36,7 +36,6 @@ def gameselection(chosen):
             backToGameHub()
         
         elif choice == 'sudoku':
-            solve(sodokuBoard)
             print_board(sodokuBoard)
             chosen = True
             backToGameHub()
