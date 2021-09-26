@@ -1,9 +1,5 @@
-#Jax Powell
-#consol tic tac toe with random ai
 import math
 import random
-
-
 class Player():
     def __init__(self, letter):
         self.letter = letter

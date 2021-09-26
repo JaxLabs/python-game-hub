@@ -2,7 +2,6 @@ from madlibs import *
 import random
 from rockpaperscissors import * 
 from tictactoe import *
-from sudoku import *
 from hangman import *
 
 def welcome():
@@ -32,11 +31,6 @@ def gameselection(chosen):
                 o_player = User('O')
                 tic = TicTacToe()
                 play(tic, x_player, o_player, print_game=True)
-            chosen = True
-            backToGameHub()
-        
-        elif choice == 'sudoku':
-            print_board(sodokuBoard)
             chosen = True
             backToGameHub()
 
